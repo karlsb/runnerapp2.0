@@ -16,6 +16,9 @@
 - [X] change the color of the line
     - [ ] If i want the above to be customiziable how do i have to structure my code?
 - [X] Be able to Remove Marker - Part of Route
+- [X] Make marker Popup disappear after removing a Marker.
 - [ ] Add tests for - Measure distance, Remove marker
-- [ ] Make marker Popup disappear after removing a Marker.
+- [ ] Define UI tests that can be implemented for the Route state.
+    - [ ] if i click remove, the specific marker was removed, and the popup is gone etc.
 - [ ] Is there a way to add a Marker between two Markers if i press the polyline for example.
+- [ ] Would it work to have the polylines follow when i drag a point? How does React handle this rerender?

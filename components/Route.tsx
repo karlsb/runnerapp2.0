@@ -4,23 +4,16 @@ import { useMapEvent, useMapEvents,Polyline} from "react-leaflet"
 import { LatLng, popup } from "leaflet"
 import { calcDistance } from "@/helpers/RouteHelpers"
 
-function saveToServer(points: LatLng[]){
-   const data = JSON.stringify(points)   
-   //TODO
+interface RouteProps{
+    mapRef: any
 }
 
-export default function Route(){
+export default function Route({mapRef}:RouteProps){
     const [state, setState] = useState<LatLng[]>([])
-    const [popupOpen, setPopupOpen] = useState<boolean>(false)
 
     useMapEvent('click',
         (e) => {
-            if(popupOpen){
-                setPopupOpen(false)
-                return
-            }
             setState((prevState) =>[...prevState, e.latlng])
-            saveToServer(state)
         }
     )
 
@@ -38,6 +31,7 @@ export default function Route(){
 
     const insertMarkerBetween = (e:any, idx:number) => {
         if (e.originalEvent.view) {
+            //Stop click on polyline from doing map click event. i.e. adding new marker
             e.originalEvent.view.L.DomEvent.stopPropagation(e)
         }
         setState((prevState) => {
@@ -62,17 +56,12 @@ export default function Route(){
     })
 
     const markers = state.map((position,idx) => {
-        return <LocationMarker key={idx} idx={idx} position={position} updatePosOnDrag={updatePosOnDrag} onRemove={onRemove} setPopupOpen={setPopupOpen}></LocationMarker>})
+        return <LocationMarker key={idx} idx={idx} position={position} updatePosOnDrag={updatePosOnDrag} onRemove={onRemove} mapRef={mapRef}></LocationMarker>})
 
     return(
         <div>
             {markers}
             {lines}
-            {/*<Polyline 
-                eventHandlers={{
-                    click: (e) => insertMarkerBetween(e) // need to know which markers the polyline is inbetween.
-                }}
-                positions={state} color="#6A80B9"></Polyline>*/}
         </div>
     )
 }
