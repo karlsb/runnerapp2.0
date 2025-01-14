@@ -10,7 +10,7 @@
 - [X] Render Lines between markers.
 - [X] Can markers be moveable
 - [X] Measure distance between all points. so the route distance.
-- [ ] Insert marker between two markers. 
+- [X] Insert marker between two markers. 
     - [ ] maybe i should allow for split and concatination of the array
 - [X] Add a new different icon
 - [X] change the color of the line

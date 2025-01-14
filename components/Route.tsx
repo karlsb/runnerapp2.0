@@ -11,7 +11,6 @@ function saveToServer(points: LatLng[]){
 
 export default function Route(){
     const [state, setState] = useState<LatLng[]>([])
-
     const [popupOpen, setPopupOpen] = useState<boolean>(false)
 
     useMapEvent('click',
@@ -28,16 +27,39 @@ export default function Route(){
     const updatePosOnDrag = (key:number, newPos:LatLng) => {
         setState((prevState) => 
             prevState.map((pos, index) => (index === key ? newPos : pos))
-        );
+        )
     }
 
     const onRemove = (key:number) => {
         setState((prevState) => 
             prevState.filter((_, index) => index !== key)
-        );
+        )
     }
 
-    useEffect(()=> {console.log(calcDistance(state))},[state])
+    const insertMarkerBetween = (e:any, idx:number) => {
+        if (e.originalEvent.view) {
+            e.originalEvent.view.L.DomEvent.stopPropagation(e)
+        }
+        setState((prevState) => {
+                const leftState = prevState.slice(0, idx+1)
+                const rightState = prevState.slice(idx+1)
+                return [...leftState, e.latlng, ...rightState]
+            }
+        )
+    }
+
+    const lines = state.map((position,idx) => {
+        if( idx === state.length -1) return null;
+        return (<Polyline key={idx}
+                    eventHandlers={{
+                        click: (e) => {
+                            insertMarkerBetween(e,idx) // need to know which markers the polyline is inbetween.
+                        }
+                    }}
+                    positions={[position, state[idx +1]]}
+                    color="#6A80B9"
+                    ></Polyline>)
+    })
 
     const markers = state.map((position,idx) => {
         return <LocationMarker key={idx} idx={idx} position={position} updatePosOnDrag={updatePosOnDrag} onRemove={onRemove} setPopupOpen={setPopupOpen}></LocationMarker>})
@@ -45,7 +67,12 @@ export default function Route(){
     return(
         <div>
             {markers}
-            <Polyline positions={state} color="#6A80B9"></Polyline>
+            {lines}
+            {/*<Polyline 
+                eventHandlers={{
+                    click: (e) => insertMarkerBetween(e) // need to know which markers the polyline is inbetween.
+                }}
+                positions={state} color="#6A80B9"></Polyline>*/}
         </div>
     )
 }

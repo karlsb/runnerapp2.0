@@ -2,7 +2,6 @@ import "leaflet/dist/leaflet.css";
 import {LatLngExpression } from "leaflet";
 import { MapContainer,Polyline,TileLayer} from "react-leaflet";
 
-import LocationMarker from "@/components/LocationMarker"
 import Route from "./Route";
 
 export default function Map() {
