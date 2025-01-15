@@ -4,7 +4,6 @@ import { LayerGroup, LayersControl, MapContainer,Polyline,TileLayer} from "react
 
 import Route from "./Route";
 import { useRef } from "react";
-import SideMenu from "./SideMenu";
 
 export default function Map() {
   const mapRef = useRef(null)
