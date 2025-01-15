@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import LocationMarker from "./LocationMarker"
 import { useMapEvent, useMapEvents,Polyline} from "react-leaflet"
-import { LatLng, popup } from "leaflet"
+import { LatLng } from "leaflet"
 import { calcDistance } from "@/helpers/RouteHelpers"
 
 interface RouteProps{

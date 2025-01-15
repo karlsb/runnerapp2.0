@@ -17,8 +17,15 @@
     - [ ] If i want the above to be customiziable how do i have to structure my code?
 - [X] Be able to Remove Marker - Part of Route
 - [X] Make marker Popup disappear after removing a Marker.
+- [X] Would it work to have the polylines follow when i drag a point? How does React handle this rerender?
+- [X] Is there a way to add a Marker between two Markers if i press the polyline for example.
+- [X] Right click on Marker to remove it.
+- [X] Resize Map
+- [X] Figure out how to add contol overlay component
 - [ ] Add tests for - Measure distance, Remove marker
 - [ ] Define UI tests that can be implemented for the Route state.
     - [ ] if i click remove, the specific marker was removed, and the popup is gone etc.
-- [ ] Is there a way to add a Marker between two Markers if i press the polyline for example.
-- [ ] Would it work to have the polylines follow when i drag a point? How does React handle this rerender?
+- [ ] Undo button
+    - [ ] Save each state in memory and we can then backtrack between the seen states.
+- [ ] Calculate Calories display
+- [ ] Make running map into reusable component, then start creating design for app.

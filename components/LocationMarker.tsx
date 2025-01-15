@@ -45,8 +45,11 @@ export default function LocationMarker({ idx, position, updatePosOnDrag, onRemov
       icon={runnerIcon}
       draggable={true}
       eventHandlers={{
-        moveend: (event) => {
+        move: (event) => {
           updatePosOnDrag(idx, event.target.getLatLng());
+        },
+        contextmenu: () => {
+          onRemove(idx)
         }
       }}
       position={position}>

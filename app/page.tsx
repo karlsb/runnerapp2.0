@@ -1,13 +1,13 @@
 
-import dynamic from "next/dynamic";
 import { LazyMap } from "../components/LazyMap";
 
 
-import Map from "../components/Map"
 export default function Home() {
   return (
     <main>
-      <LazyMap />
+      <div className="flex justify-center bg-slate-200 items-center h-screen">
+        <LazyMap />
+      </div>
     </main>
   );
 }
