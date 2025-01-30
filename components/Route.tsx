@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import LocationMarker from "./LocationMarker"
 import { useMapEvent, useMapEvents,Polyline} from "react-leaflet"
 import { LatLng } from "leaflet"
@@ -6,14 +6,17 @@ import { calcDistance } from "@/helpers/RouteHelpers"
 
 interface RouteProps{
     mapRef: any
+    state: LatLng[]
+    setState: Dispatch<SetStateAction<LatLng[]>>
 }
 
-export default function Route({mapRef}:RouteProps){
-    const [state, setState] = useState<LatLng[]>([])
+export default function Route({mapRef, state, setState}:RouteProps){
+    //const [state, setState] = useState<LatLng[]>([])
 
     useMapEvent('click',
         (e) => {
             setState((prevState) =>[...prevState, e.latlng])
+            console.log(calcDistance(state))
         }
     )
 

@@ -29,3 +29,11 @@
     - [ ] Save each state in memory and we can then backtrack between the seen states.
 - [ ] Calculate Calories display
 - [ ] Make running map into reusable component, then start creating design for app.
+
+- [ ] Make a control panel on the left.
+- [ ] this control panel should do: 
+    - [X] Show current distance of route
+    - [ ] Show calories - if you are logged in and have weight data.
+    - [X] Remove last point
+    - [X] Clear route with popup confirmation needed.
+    - [ ] Save route. - How do i deal with accounts?
