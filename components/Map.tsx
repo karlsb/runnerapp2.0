@@ -3,7 +3,7 @@ import {LatLngExpression, Layer } from "leaflet";
 import { LayerGroup, LayersControl, MapContainer,Polyline,TileLayer} from "react-leaflet";
 import { LatLng } from "leaflet"
 
-import { Button } from "@material-tailwind/react";
+import { Button ,Card, Popover, PopoverContent, PopoverHandler } from "@material-tailwind/react";
 
 import Route from "./Route";
 import { useEffect, useRef, useState} from "react";
@@ -23,22 +23,26 @@ export default function Map() {
   const mapRef = useRef(null)
   const position: LatLngExpression = [59.325264776484666, 18.07139396667481] //TODO: this should be changed to be your location or in the middle of stockholm or something.
   const [points, setPoints] = useState<LatLng[]>([]);
-  const [distance, setDistance] = useState<number>(0)
-  const [showConfirm, setShowConfirm] = useState<boolean>(false)
+  const [distance, setDistance] = useState<string>("0")
   const [loggedIn, setLoggedIn] = useState<boolean>(false)
 
+  const [openPopover, setOpenPopover] = useState(false)
+
   useEffect(() => {
-    setDistance(calcDistance(points))
+    setDistance(calcDistance(points).toFixed(2))
   },[points])
 
+
+  const handleOpen = () => setOpenPopover((cur)=> !cur)
+
   const removeLastPoint = () => {
-    setPoints((prevState) => prevState.slice(0,0))
+    setPoints((prevState) => prevState.slice(0,-1))
 
   }
 
   const clearRoute = () => {
-    setShowConfirm(false)
     setPoints([])
+    setOpenPopover(false)
   }
 
   const handleSave = () => {
@@ -51,22 +55,43 @@ export default function Map() {
 
   return (
     <div className="h-screen w-screen">
-      <div className="absolute p-4 z-10 top-28 left-10 bg-slate-100 rounded-lg">
-        <div>
-          <span>Distance:</span>
-          <span>{distance}</span>
+      <Card className="absolute bg-gray-50/60 p-10 z-10 top-28 left-10 rounded-xl flex justify-center items-center space-y-10">
+        <div className="flex space-x-8 opacity-100">
+          <div className="font-bold text-lg flex space-x-1">
+            <span>{distance}</span>
+            <span>km</span>
+          </div>
+          <div className="font-bold text-lg flex space-x-1">
+            <span>0.00</span>
+            <span>Kcal</span>
+          </div>
         </div>
-        <div>
-          <Button color="red" onClick={removeLastPoint}>Remove Last Point</Button>
-        </div>
-        <div>
-          <Button color="red" onClick={() => setShowConfirm(true)}>Clear Route</Button>
-          {showConfirm ? <div><button onClick={clearRoute}>confirm</button><button onClick={() => setShowConfirm(false)}>cancel</button></div> : <></>}
+        <div className="flex space-x-4">
+          <div>
+            <Button color="red" onClick={removeLastPoint}>Remove Point</Button>
+          </div>
+          <div className="">
+          <Popover open={openPopover} handler={setOpenPopover} placement="right" offset={50}>
+            <PopoverHandler>
+              <Button color="red">Clear Route</Button>
+            </PopoverHandler>
+            <PopoverContent>
+              <div className="text-black bg-gray-50/60 flex flex-col justify-center items-center space-y-4">
+                <span>Are you sure you want to clear the route?</span>
+                <div className="w-full flex space-x-4 justify-center">
+                  <Button color="blue" className="w-1/2" onClick={clearRoute}>Yes</Button>  
+                  <Button color="red" className="w-1/2" onClick={()=>setOpenPopover(false)}>No</Button>  
+                </div>
+              </div>
+            
+            </PopoverContent>
+          </Popover>
+       </div>
         </div>
         <div>
           <Button color="blue" onClick={handleSave}>Save</Button>
         </div>
-      </div>
+      </Card>
       <MapContainer
         ref={mapRef}
         center={position}

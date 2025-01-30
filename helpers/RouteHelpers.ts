@@ -7,7 +7,7 @@ export function calcDistance(points:LatLng[]) : number {
         if (idx < array.length-1){
             return acc + currentVal.distanceTo(array[idx+1])
         }
-        return acc
+        return acc/1000
     },0)
 
     return sum
