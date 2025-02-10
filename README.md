@@ -9,9 +9,9 @@ Coming Soon..
 
 ### Prerequisites
 
-- Node.js (LTS recommended)
-- npm or yarn
-- Git
+- [Node.js](https://nodejs.org/en) (LTS recommended)
+- npm or [yarn](https://yarnpkg.com/getting-started/install)
+- [Git](https://git-scm.com/downloads)
 
 ### Setup
 
