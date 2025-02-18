@@ -20,6 +20,9 @@
 - [X] Resize Map
 - [X] Figure out how to add contol overlay component
 
+
+- [ ] Position overlay element and popover on mobile screens probably need library like Floating UI
+
 - [ ] Add tests for - Measure distance, Remove marker
 - [ ] Define UI tests that can be implemented for the Route state.
     - [ ] if i click remove, the specific marker was removed, and the popup is gone etc.
@@ -33,3 +36,5 @@ Later:
 - [ ] make account to save route
 - [ ] Show calories
 - [ ] movable panel
+
+
