@@ -1,6 +1,5 @@
-import { Popup, Marker, Tooltip } from "react-leaflet"
+import { Popup, Marker} from "react-leaflet"
 import { LatLng } from "leaflet";
-import { useRef } from "react";
 import React from "react";
 
 
@@ -20,19 +19,19 @@ const runnerIcon = L.icon({
 interface LocationMarkerProps {
   idx: number
   position: LatLng
-  updatePosOnDrag: any
-  onRemove: any
-  mapRef: any
+  updatePosOnDrag: (key: number, newPos: LatLng) => void
+  onRemove: (key:number) => void
+  mapRef: React.RefObject<L.Map>
 }
 
 
 //TODO Use context for mapRef maybe, depending on if i need it more.
 export default function LocationMarker({ idx, position, updatePosOnDrag, onRemove, mapRef }: LocationMarkerProps) {
 
-  const closePopup = (e:any) => {
+  const closePopup = (e:React.MouseEvent<HTMLButtonElement>) => {
     if (e.view) {
       //Stop click on popup button from doing map click event. i.e. adding new marker
-      e.view.L.DomEvent.stopPropagation(e)
+      L.DomEvent.stopPropagation(e.nativeEvent)
     }
     if (mapRef.current) {
       mapRef.current.closePopup()

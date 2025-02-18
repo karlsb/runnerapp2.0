@@ -1,17 +1,17 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { Dispatch, SetStateAction } from "react"
 import LocationMarker from "./LocationMarker"
-import { useMapEvent, useMapEvents,Polyline} from "react-leaflet"
+import { useMapEvent, Polyline} from "react-leaflet"
 import { LatLng } from "leaflet"
+import L from "leaflet"
 import { calcDistance } from "@/helpers/RouteHelpers"
 
 interface RouteProps{
-    mapRef: any
+    mapRef: React.RefObject<L.Map>
     state: LatLng[]
     setState: Dispatch<SetStateAction<LatLng[]>>
 }
 
 export default function Route({mapRef, state, setState}:RouteProps){
-    //const [state, setState] = useState<LatLng[]>([])
 
     useMapEvent('click',
         (e) => {
@@ -32,10 +32,11 @@ export default function Route({mapRef, state, setState}:RouteProps){
         )
     }
 
-    const insertMarkerBetween = (e:any, idx:number) => {
+    const insertMarkerBetween = (e:L.LeafletMouseEvent, idx:number) => {
         if (e.originalEvent.view) {
             //Stop click on polyline from doing map click event. i.e. adding new marker
-            e.originalEvent.view.L.DomEvent.stopPropagation(e)
+            //e.originalEvent.view.L.DomEvent.stopPropagation(e)
+            L.DomEvent.stopPropagation(e.originalEvent)
         }
         setState((prevState) => {
                 const leftState = prevState.slice(0, idx+1)

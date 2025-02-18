@@ -1,16 +1,16 @@
 
 
 import { Button ,Card, Popover, PopoverContent, PopoverHandler } from "@material-tailwind/react";
+import { Dispatch, SetStateAction } from "react";
 
 interface OverlayProps {
     distance: string
-    removeLastPoint: any
-    openPopover: any
-    setOpenPopover: any
-    clearRoute: any
-    handleSave: any
+    openPopover: boolean
+    removeLastPoint: () => void 
+    setOpenPopover: Dispatch<SetStateAction<boolean>>
+    clearRoute: () => void
+    handleSave:  () => void
 }
-
 
 export default function Overlay({distance,removeLastPoint,openPopover, setOpenPopover, clearRoute, handleSave}: OverlayProps){
     return (

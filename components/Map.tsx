@@ -1,9 +1,8 @@
 import "leaflet/dist/leaflet.css";
-import {LatLngExpression, Layer } from "leaflet";
-import { LayerGroup, LayersControl, MapContainer,Polyline,TileLayer} from "react-leaflet";
+import { LatLngExpression } from "leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
 import { LatLng } from "leaflet"
 
-import { Button ,Card, Popover, PopoverContent, PopoverHandler } from "@material-tailwind/react";
 
 import Route from "./Route";
 import { useEffect, useRef, useState} from "react";
@@ -34,7 +33,7 @@ export default function Map() {
   },[points])
 
 
-  const handleOpen = () => setOpenPopover((cur)=> !cur)
+  //const handleOpen = () => setOpenPopover((cur)=> !cur)
 
   const removeLastPoint = () => {
     setPoints((prevState) => prevState.slice(0,-1))
@@ -51,6 +50,7 @@ export default function Map() {
       renderLoginPopup()
     }else{
       saveToServer();
+      setLoggedIn(true);
     }
   }
 
