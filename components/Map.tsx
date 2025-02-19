@@ -20,7 +20,7 @@ function saveToServer(){
 }
 
 export default function Map() {
-  const mapRef = useRef(null)
+  const mapRef = useRef<L.Map>(null)
   const position: LatLngExpression = [59.325264776484666, 18.07139396667481] //TODO: this should be changed to be your location or in the middle of stockholm or something.
   const [points, setPoints] = useState<LatLng[]>([]);
   const [distance, setDistance] = useState<string>("0")
