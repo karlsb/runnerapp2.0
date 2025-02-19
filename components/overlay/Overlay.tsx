@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction } from "react";
 
 interface OverlayProps {
     distance: string
+    calories?: string
     openPopover: boolean
     removeLastPoint: () => void 
     setOpenPopover: Dispatch<SetStateAction<boolean>>
@@ -12,7 +13,7 @@ interface OverlayProps {
     handleSave:  () => void
 }
 
-export default function Overlay({distance,removeLastPoint,openPopover, setOpenPopover, clearRoute, handleSave}: OverlayProps){
+export default function Overlay({calories,distance,removeLastPoint,openPopover, setOpenPopover, clearRoute, handleSave}: OverlayProps){
     return (
       <Card className="absolute bg-gray-50/60 p-10 z-10 top-[60%] md:top-28 md:left-10 rounded-xl flex justify-center items-center space-y-5 sm:space-y-10">
         <div className="flex space-x-8 opacity-100">
@@ -21,7 +22,7 @@ export default function Overlay({distance,removeLastPoint,openPopover, setOpenPo
             <span>km</span>
           </div>
           <div className="font-bold text-lg flex space-x-1">
-            <span>0.00</span>
+            <span>{calories}</span>
             <span>Kcal</span>
           </div>
         </div>
@@ -48,7 +49,16 @@ export default function Overlay({distance,removeLastPoint,openPopover, setOpenPo
        </div>
         </div>
         <div>
+          <Popover placement="bottom">
+          <PopoverHandler>
           <Button color="blue" onClick={handleSave}>Save</Button>
+          </PopoverHandler>
+          <PopoverContent className="z-50">
+            <div>
+              <p className="font-bold">Coming soon!</p>
+            </div>
+          </PopoverContent>
+          </Popover>
         </div>
       </Card>
     )

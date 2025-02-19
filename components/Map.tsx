@@ -12,11 +12,14 @@ import Overlay from "./overlay/Overlay";
 
 
 function renderLoginPopup(){
-
 }
 
 function saveToServer(){
 
+}
+
+function calcCalories(distance: string): number{
+  return 70*Number(distance)
 }
 
 export default function Map() {
@@ -24,6 +27,7 @@ export default function Map() {
   const position: LatLngExpression = [59.325264776484666, 18.07139396667481] //TODO: this should be changed to be your location or in the middle of stockholm or something.
   const [points, setPoints] = useState<LatLng[]>([]);
   const [distance, setDistance] = useState<string>("0")
+  const [calories, setCalories] = useState<string>("0")
   const [loggedIn, setLoggedIn] = useState<boolean>(false)
 
   const [openPopover, setOpenPopover] = useState(false)
@@ -32,6 +36,9 @@ export default function Map() {
     setDistance(calcDistance(points).toFixed(2))
   },[points])
 
+  useEffect(() => {
+    setCalories(calcCalories(distance).toFixed(0))
+  }, [distance])
 
   //const handleOpen = () => setOpenPopover((cur)=> !cur)
 
@@ -58,6 +65,7 @@ export default function Map() {
     <div className="relative w-[100%] h-[100%]">
       <Overlay 
         distance={distance}
+        calories={calories}
         removeLastPoint={removeLastPoint}
         openPopover={openPopover}
         setOpenPopover={setOpenPopover}
