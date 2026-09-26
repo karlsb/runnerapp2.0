@@ -45,4 +45,3 @@ npm run dev # or yarn dev
 ## Tech Stack
 
 - Frontend: Nextjs, TypeScript, TailwindCss, OpenStreetMap, Leaflet, React-Leaflet
-- Backend: Coming soon..
