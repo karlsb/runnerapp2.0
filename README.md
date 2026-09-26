@@ -16,7 +16,7 @@
 ### Setup
 
 ```bash
-# Clone repositoryg
+# Clone repository
 
 git clone https://github.com/karlsb/runnerapp2.0.git
 
@@ -39,9 +39,9 @@ npm run dev # or yarn dev
 ## Features
 
 - Measure your running routes.
-- Change your route by dragging makrkers
+- Change your route by dragging markers
 - Easily remove any marker in the route 
 
 ## Tech Stack
 
-- Frontend: Nextjs, TypeScript, TailwindCss, OpenStreetMap, Leaflet, React-Leaflet
+- Frontend: Next.js, TypeScript, TailwindCSS, OpenStreetMap, Leaflet, React-Leaflet
